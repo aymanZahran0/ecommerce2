@@ -10,6 +10,7 @@ export default function Home() {
 
    <Typography sx={{backgroundColor:'red', color:'yellow', my:'10px'}} >home</Typography>
    <Typography sx={{backgroundColor:'gray', color:'yellow'}} >2</Typography>
+   <Typography sx={{backgroundColor:'yellow', color:'red'}} >3</Typography>
 
   </> 
 )}
