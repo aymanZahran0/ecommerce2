@@ -1,8 +1,12 @@
 import { createTheme, CssBaseline, ThemeProvider, Container } from '@mui/material'
 import { useState } from 'react'
 import './App.css'
+import Footer from './components/common/Footer'
+import Navbar from './components/common/Navbar'
 import Home from './components/home/Home.jsx'
-
+import Login from './components/login/Login'
+import NotFound_Page from './components/notFound_page/NotFound_Page'
+import Register from './components/register/Register'
 
 
 
@@ -12,6 +16,9 @@ function App() {
     palette:{
       mainColor:{
         main:'#DB4444',
+      },
+      mutedColor:{
+        main:'#AFAFAF'
       }
     },
     typography:{
@@ -25,10 +32,14 @@ function App() {
     <>
     <ThemeProvider theme ={myTheme}>
       <CssBaseline/>
-      <Container maxWidth="xl">
-        <Home/>
-      </Container>
+      <Navbar/>
+      <Container maxWidth="xl" sx={{mt:'50px',}}>
       
+      </Container>
+      {/* <Register/> */}
+      <NotFound_Page/>
+
+      <Footer/>
     </ThemeProvider>
   
     </>
