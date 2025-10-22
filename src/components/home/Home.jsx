@@ -6,6 +6,11 @@ import Typography from '@mui/material/Typography'
 
 export default function Home() {
   return (
-    <Typography sx={{backgroundColor:'red', color:'yellow'}} >Home</Typography>
-  )
-}
+  <>
+
+   <Typography sx={{backgroundColor:'red', color:'yellow', my:'10px'}} >home</Typography>
+   <Typography sx={{backgroundColor:'gray', color:'yellow'}} >2</Typography>
+   <Typography sx={{backgroundColor:'yellow', color:'red'}} >3</Typography>
+
+  </> 
+)}
