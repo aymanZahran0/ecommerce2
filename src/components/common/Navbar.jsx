@@ -16,6 +16,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import Favorite_Bar from "../../assets/svgComponents/Favorite_Bar";
 import Shop_Icon from "../../assets/svgComponents/Shop_icon";
+import { Link as RouterLink } from "react-router-dom"; //  conflict اعدت تسميته لعدم حدوث 
+import { Link } from "@mui/material";
+
+
 
 
 
@@ -35,7 +39,7 @@ export default function Navbar() {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 ,pb:'40px',}}>
+      <Box sx={{ flexGrow: 1 ,pb:'40px', mb:'40px'}}>
         <AppBar
           position="static"
           sx={{ backgroundColor: "white", color: "black" , position:'fixed', zIndex:'99999',  }}
@@ -67,20 +71,23 @@ export default function Navbar() {
                 }}
                 open={anchorElNav}
                 onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "flex",lg:'none' } }}
+                sx={{ display: { xs: "block", md: "flex",lg:'none' },  position:'fixed', zIndex:'99999'}}
               >
                 
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>Home</Typography>
+                <MenuItem sx={{ }} component={RouterLink} to="/home"  onClick={handleCloseNavMenu}>
+                  <Typography variant="body1" color="">Home</Typography>
                 </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>Contact</Typography>
+
+                <MenuItem  component={RouterLink} to="/contact" onClick={handleCloseNavMenu}>
+                  <Typography variant="body1" color="">Contact</Typography>
                 </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>About</Typography>
+
+                <MenuItem component={RouterLink} to="/about" onClick={handleCloseNavMenu}>
+                  <Typography variant="body1" color="">About</Typography>
                 </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>Sign Up</Typography>
+
+                <MenuItem component={RouterLink} to="/" onClick={handleCloseNavMenu}>
+                  <Typography variant="body1" color="">Sign Up</Typography>
                 </MenuItem>
               
               </Menu>
@@ -106,18 +113,20 @@ export default function Navbar() {
                 display: { xs: "none", sm:'none', md: "felx",lg:'flex' },
               }}
             >
-              <Typography variant="body1" sx={{ mx: "10px" }}>
-                Home
-              </Typography>
-              <Typography variant="body1" sx={{ mx: "10px" }}>
-                Contact
-              </Typography>
-              <Typography variant="body1" sx={{ mx: "10px" }}>
-                About
-              </Typography>
-              <Typography variant="body1" sx={{ mx: "10px" }}>
-                Signup
-              </Typography>
+
+              <Link component={RouterLink} to="/home" sx={{ mx: "10px", color:'black' }} underline="hover" >
+              Home
+              </Link>
+              <Link component={RouterLink} to="/contact" sx={{ mx: "10px", color:'black' }} underline="hover" >
+              Contact
+              </Link>
+              <Link component={RouterLink} to="/about" sx={{ mx: "10px", color:'black' }} underline="hover" >
+              About
+              </Link>
+              <Link component={RouterLink} to="/" sx={{ mx: "10px", color:'black' }} underline="hover" >
+              Signup
+              </Link>
+
             </Box>
 
             <TextField
