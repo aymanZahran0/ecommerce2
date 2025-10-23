@@ -8,7 +8,8 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Google_Icon from '../../assets/svgComponents/Google_Icon'
 import InputAdornment from '@mui/material/InputAdornment';
-
+import { Link as RouterLink } from "react-router-dom";
+import { Link } from "@mui/material";
 
 
 
@@ -36,7 +37,6 @@ return (
            width:{md:'450px', xs:'450px'}, 
            height:{ md:'85vh', xs:'85vh'},
            m:'auto',
-          //  backgroundColor:'red'
           }}
         alignContent="center"
         justifyContent="center"
@@ -61,7 +61,7 @@ return (
 
         <Box sx={{display:'flex',justifyContent:'center', mt:'30px'}} color='text.secondary'>
           <Typography variant="body1" sx={{mr:'10px',  textAlign:'center',}}>Allredy have account? </Typography>
-          <Typography variant="body1" sx={{cursor:'pointer'}}>Log in</Typography>
+          <Link variant="body1" component={RouterLink} to="/login" sx={{cursor:'pointer', color:'black'}} underline="">Log in</Link>
         </Box>
        
  
