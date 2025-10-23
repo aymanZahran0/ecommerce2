@@ -16,6 +16,8 @@ import Facebook_Icon from "../../assets/svgComponents/media_Icon/Facebook_Icon";
 import Twitter_Icon from "../../assets/svgComponents/media_Icon/Twitter_Icon";
 import Linkedin_Icon from "../../assets/svgComponents/media_Icon/Linkedin_Icon";
 import Instagram_Icon from "../../assets/svgComponents/media_Icon/Instagram_Icon";
+import Secondary_Input from "./Secondary_Input";
+
 
 export default function Footer() {
   return (
@@ -39,29 +41,23 @@ export default function Footer() {
                 Get 10% off your first order
               </Typography>
 
-              <TextField
-                hiddenLabel
-                size="small"
-                variant="outlined"
-                placeholder="Enter your email"
-                color="text.secondary"
-                slotProps={{
-                  input: {
-                    endAdornment: (
-                      <InputAdornment
-                        position="start"
-                        sx={{ cursor: "pointer" }}
-                      >
-                        <Icon_Input />
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                sx={{
-                  input: { color: "white" },
-                  border: "solid white 1px",
-                  borderRadius: "5px",
-                }}
+              {/* __________________ */}
+              <Secondary_Input
+               hiddenLabel
+               size="small"
+               placeholder="Enter your email"
+               slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment
+                      position="start"
+                      sx={{ cursor: "pointer" }}
+                    >
+                      <Icon_Input />
+                    </InputAdornment>
+                  ),
+                },
+              }}
               />
             </Grid>
 

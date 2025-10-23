@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginImg from '../../assets/LoginImg.svg'
 import Box from "@mui/material/Box"
-import MyButton from '../common/Primary_Button'
+import Primary_Button from '../common/Primary_Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
@@ -46,7 +46,7 @@ return (
         <TextField fullWidth placeholder='Password' type='password' variant="standard" />
 
         <Box sx={{display:'flex', justifyContent:'space-between', my:'30px',}}>
-        <MyButton sx={{display:'',px:'45px' }}>Log in</MyButton>
+        <Primary_Button sx={{display:'',px:'45px' }}>Log in</Primary_Button>
         <Typography variant="body1" color="mainColor" sx={{  alignContent:'center', cursor:'pointer'}}> Forget Password?</Typography>
 
         </Box>
