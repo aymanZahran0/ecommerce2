@@ -1,35 +1,28 @@
-import { createTheme, CssBaseline, ThemeProvider, Container } from '@mui/material'
-import { useState } from 'react'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import './App.css'
-import Home from './components/home/Home.jsx'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import My_Theme from './assets/My_Theme'
+import routers from './assets/Routers'
 
 
 
 
 function App() {
 
-  const myTheme = createTheme({
-    palette:{
-      mainColor:{
-        main:'#DB4444',
-      }
-    },
-    typography:{
-      fontFamily: ["Helvetica", "Arial", "sans-serif"].join(","),
-      
-    }
-  });
-
 
   return (
     <>
-    <ThemeProvider theme ={myTheme}>
-      <CssBaseline/>
-      <Container maxWidth="xl">
-        <Home/>
-      </Container>
-      
-    </ThemeProvider>
+
+   
+    
+      <ThemeProvider theme ={My_Theme}>
+        <CssBaseline/>
+
+          <RouterProvider router ={routers}/>
+
+      </ThemeProvider>
+
+    
   
     </>
   )
