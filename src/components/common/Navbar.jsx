@@ -1,13 +1,10 @@
 import React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -18,14 +15,30 @@ import Favorite_Bar from "../../assets/svgComponents/Favorite_Bar";
 import Shop_Icon from "../../assets/svgComponents/Shop_icon";
 import { Link as RouterLink } from "react-router-dom"; //  conflict اعدت تسميته لعدم حدوث 
 import { Link } from "@mui/material";
-
-
+import {PersonOutline} from '@mui/icons-material';
+import Account_Icon from "../../assets/svgComponents/Account_Icon";
+import Nav_Menu from "./Nav_Menu";
+import MyAccount_Icon from "../../assets/svgComponents/person_Button_Icons/MyAccount_Icon";
+import Logout_Icon from "../../assets/svgComponents/person_Button_Icons/Logout_Icon";
+import Reviews_Icon from "../../assets/svgComponents/person_Button_Icons/Reviews_Icon";
+import Cancelation_Icon from "../../assets/svgComponents/person_Button_Icons/Cancelation_Icon";
+import Order_Icon from "../../assets/svgComponents/person_Button_Icons/Order_Icon";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../assets/redux/authSlice";
+import { Navigate, useNavigate } from 'react-router-dom'
 
 
 
 
 export default function Navbar() {
+  // let myToken =   localStorage.getItem('myToken');
+  let myToken =   sessionStorage.getItem('myToken');
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElAccount, setAnchorElAccount] = useState(null);
+
+  const {loading,error,data,token} = useSelector((state)=>state.auth.authData);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +48,20 @@ export default function Navbar() {
     setAnchorElNav(null);
   };
 
+
+  const handleOpenAccountMenu = (event) => {
+    setAnchorElAccount(event.currentTarget);
+  };
+
+  const handleCloseAccountMenu = () => {
+    setAnchorElAccount(null);
+  };
+
+  function logoutFun (){
+    dispatch(logout());
+    handleCloseAccountMenu();
+    navigate('/');
+  }
 
 
   return (
@@ -73,7 +100,7 @@ export default function Navbar() {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "flex",lg:'none' },  position:'fixed', zIndex:'99999'}}
               >
-                
+              
                 <MenuItem sx={{ }} component={RouterLink} to="/home"  onClick={handleCloseNavMenu}>
                   <Typography variant="body1" color="">Home</Typography>
                 </MenuItem>
@@ -87,7 +114,7 @@ export default function Navbar() {
                 </MenuItem>
 
                 <MenuItem component={RouterLink} to="/" onClick={handleCloseNavMenu}>
-                  <Typography variant="body1" color="">Sign Up</Typography>
+                 {!myToken? <Typography variant="body1" color="">Sign Up</Typography>:''}
                 </MenuItem>
               
               </Menu>
@@ -123,9 +150,9 @@ export default function Navbar() {
               <Link component={RouterLink} to="/about" sx={{ mx: "10px", color:'black' }} underline="hover" >
               About
               </Link>
-              <Link component={RouterLink} to="/" sx={{ mx: "10px", color:'black' }} underline="hover" >
+             {!myToken?   <Link component={RouterLink} to="/" sx={{ mx: "10px", color:'black' }} underline="hover" >
               Signup
-              </Link>
+              </Link>:''}
 
             </Box>
 
@@ -148,23 +175,85 @@ export default function Navbar() {
               variant="filled"
             />
 
+         {myToken? 
             <Box sx={{ display: { xs: "flex", sm:'flex',md: "flex", } }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Favorite_Bar/>
-              </IconButton>
+                <IconButton
+                  size="large"
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                >
+                  <Favorite_Bar/>
+                </IconButton>
 
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Shop_Icon />
-              </IconButton>
-            </Box>
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Shop_Icon />
+                </IconButton>
+                
+                {/* account menu ______________ */}
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenAccountMenu}
+                  color="inherit"
+                >
+                  <Account_Icon/>
+                </IconButton>
+
+                
+                <Nav_Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElAccount}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={anchorElAccount}
+                  onClose={handleCloseAccountMenu}
+                  sx={{ position:'fixed', zIndex:'99999',
+                  }}
+                >
+                  <MenuItem sx={{ }} component={RouterLink} to="account"  onClick={handleCloseAccountMenu}>
+                    <MyAccount_Icon />
+                    <Typography  ml="15px" variant="body1" color="">Manage My Account</Typography>
+                  </MenuItem>
+
+                  <MenuItem  component={RouterLink} to="account"  onClick={handleCloseAccountMenu}>
+                    <Order_Icon />
+                    <Typography ml="15px" variant="body1" color="">My Order</Typography>
+                  </MenuItem>
+
+                  <MenuItem component={RouterLink} to="account"  onClick={handleCloseAccountMenu}>
+                    <Cancelation_Icon />
+                    <Typography  ml="15px" variant="body1" color="">My Cancellations</Typography>
+                  </MenuItem>
+
+                  <MenuItem component={RouterLink} to="account" onClick={handleCloseAccountMenu}>
+                    <Reviews_Icon />
+                    <Typography  ml="15px" variant="body1" color=""> My Reviews </Typography>
+                  </MenuItem>
+
+                  <MenuItem  onClick={logoutFun}>
+                    <Logout_Icon />
+                    <Typography  ml="15px" variant="body1" color=""> Logout </Typography>
+                  </MenuItem>
+                
+                </Nav_Menu>
+
+                
+            </Box> : ''
+          }
+
           </Toolbar>
         </AppBar>
       </Box>
