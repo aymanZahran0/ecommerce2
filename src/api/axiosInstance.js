@@ -1,26 +1,21 @@
 import axios from "axios";
-import { logout } from "../assets/redux/authSlice";
-import { useSelector} from 'react-redux'
 
- const myToken = sessionStorage.getItem('myToken')
-//  const {token} = useSelector((state)=>state.auth.authData)
+
+ const token = localStorage.getItem('myToken')
 
  const axiosInstance = axios.create({
-    baseURL: "https://www.quickpickdeal.com/api",
+    baseURL: "https://fakestoreapi.com",
   });
-
 
   axiosInstance.interceptors.request.use(
     
     (config) => {
-        
-     const {token} = useSelector((state)=>state.auth.authData)
-        if(myToken){
-            console.log(myToken)
-            config.headers.Authorization = `Bearer ${myToken}`
-            console.log(config.headers);
+
+        if(token){
+            console.info(token)
+            config.headers.Authorization = `Bearer ${token}`
         }else{
-            console.log('token not found')
+            // console.info('token not found')
         }
         return config
     },
@@ -30,17 +25,13 @@ import { useSelector} from 'react-redux'
 
   axiosInstance.interceptors.response.use(
     (response) => {
-        // console.log(response)
         return response
     },
     (error) => {
-
-        console.log(error)
-        
+        console.error(error)
         return Promise.reject(error)
     }
   );
-
 
 
   export default axiosInstance;

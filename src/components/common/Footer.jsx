@@ -17,6 +17,7 @@ import Twitter_Icon from "../../assets/svgComponents/media_Icon/Twitter_Icon";
 import Linkedin_Icon from "../../assets/svgComponents/media_Icon/Linkedin_Icon";
 import Instagram_Icon from "../../assets/svgComponents/media_Icon/Instagram_Icon";
 import Secondary_Input from "./Secondary_Input";
+import CopyrightIcon from '@mui/icons-material/Copyright';
 
 
 export default function Footer() {
@@ -25,12 +26,8 @@ export default function Footer() {
       <Box sx={{ backgroundColor: "black", color: "white", py: "50px" }}>
         <Container maxWidth="xl">
           <Grid container spacing={2}>
-
             {/* 1 */}
-            <Grid 
-              size={{ lg: 3, md: 3, sm: 4, xs:6}}
-              sx={{}}
-            >
+            <Grid size={{ lg: 3, md: 3, sm: 4, xs: 6 }} sx={{}}>
               <Typography variant="h5" mb="20px" color="">
                 Exclusive
               </Typography>
@@ -43,29 +40,26 @@ export default function Footer() {
 
               {/* __________________ */}
               <Secondary_Input
-               hiddenLabel
-               size="small"
-               placeholder="Enter your email"
-               slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment
-                      position="start"
-                      sx={{ cursor: "pointer" }}
-                    >
-                      <Icon_Input />
-                    </InputAdornment>
-                  ),
-                },
-              }}
+                hiddenLabel
+                size="small"
+                placeholder="Enter your email"
+                slotProps={{
+                  input: {
+                    endAdornment: (
+                      <InputAdornment
+                        position="start"
+                        sx={{ cursor: "pointer" }}
+                      >
+                        <Icon_Input />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
               />
             </Grid>
 
             {/* 2 */}
-            <Grid 
-             size={{ lg: 2, md: 4, sm: 4, xs:6 }}
-            
-            >
+            <Grid size={{ lg: 2, md: 4, sm: 4, xs: 6 }}>
               <Typography variant="h5" mb="20px">
                 Support
               </Typography>
@@ -78,10 +72,7 @@ export default function Footer() {
             </Grid>
 
             {/* 3 */}
-            <Grid 
-              size={{ lg: 2, md: 2.5, sm: 4, xs:6 }}
-              sx={{my:'20px'}}
-            >
+            <Grid size={{ lg: 2, md: 2.5, sm: 4, xs: 6 }} sx={{ my: "20px" }}>
               <Typography variant="h5" mb="20px">
                 Account
               </Typography>
@@ -99,10 +90,7 @@ export default function Footer() {
             </Grid>
 
             {/* 4 */}
-            <Grid 
-              size={{ lg: 2, md: 2.5, sm: 6, xs:6 }}
-              sx={{my:'20px'}}
-            >
+            <Grid size={{ lg: 2, md: 2.5, sm: 6, xs: 6 }} sx={{ my: "20px" }}>
               <Typography variant="h5" mb="20px">
                 Quick Link
               </Typography>
@@ -131,19 +119,31 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ ml: "5px" }}>
                   <Google_Play />
-                  <Box><App_Store /></Box>
+                  <Box>
+                    <App_Store />
+                  </Box>
                 </Box>
               </Box>
               {/* media icon */}
-              <Stack spacing={{ xs: 3, sm: 3}} direction="row">
+              <Stack spacing={{ xs: 3, sm: 3 }} direction="row">
                 <Facebook_Icon />
                 <Twitter_Icon />
                 <Instagram_Icon />
                 <Linkedin_Icon />
               </Stack>
-
             </Grid>
           </Grid>
+
+          <Box sx={{display:'flex', mt: "40px", justifyContent:'center'}}>
+            <CopyrightIcon sx={{color:'#AFAFAF'}}/>
+            <Typography
+              variant="body1"
+              sx={{ textAlign: "", ml:'5px',color:"#AFAFAF" }}
+            >
+              Copyright Rimel 2025. All right reserved
+            </Typography>
+         
+          </Box>
         </Container>
       </Box>
     </>

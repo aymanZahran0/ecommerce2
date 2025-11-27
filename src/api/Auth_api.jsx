@@ -1,43 +1,44 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import axiosInstance from "./axiosInstance";
+import {jwtDecode} from "jwt-decode";
 
 
-
+// // register
 // export  const register_api = createAsyncThunk('auth/register',async(user,{ rejectWithValue })=>{
-
 //     try{
-//         const {data} = await axios.post('https://www.quickpickdeal.com/api/auth/registration',user);
-//         return data;
-//     }catch (err){
-//         return rejectWithValue(err.response.data)
+//     const {data} = await axiosInstance.post('/users',user);
+//     return data;
 //     }
-    
+//     catch (err){
+//       return rejectWithValue(err.response.data)
+//     }
 // });
 
 
-// export  const Login_api = createAsyncThunk('auth/login',async(user)=>{
-
-//     const {data} = await axios.post('https://www.quickpickdeal.com/api/auth/login',user);
+// // login
+// export  const Login_api = createAsyncThunk('auth/login',async(user,{ rejectWithValue })=>{
+//     try{
+//     const {data} = await axiosInstance.post('/auth/login',user);
 //     return data
+//     }
+//     catch (err){
+//         console.error(err.response.data)
+//     return rejectWithValue(err.response.data)
+//     }
 // });
 
 
+// fetch userData from api by id 
+export const getUserById = createAsyncThunk( "auth/getUserById",async (_, { rejectWithValue }) => {
+    const decoded = jwtDecode(JSON.stringify (localStorage.getItem('myToken')));
+    const userId = decoded.sub
 
-
-
-
-export  const register_api = createAsyncThunk('auth/register',async(user)=>{
-
-    const {data} = await axiosInstance.post('/auth/registration',user);
-    return data;
-});
-
-
-export  const Login_api = createAsyncThunk('auth/login',async(user)=>{
-
-    const {data} = await axiosInstance.post('/auth/login',user);
-    return data
-});
-
-
+    try {
+      const {data} = await axiosInstance.get(`/users/${userId}`, {})
+      console.log(data)
+      return data;
+    } catch (err) {
+      return rejectWithValue( err.response.data);
+    }
+  }
+);
