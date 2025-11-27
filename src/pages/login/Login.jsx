@@ -116,6 +116,7 @@ export default function Login() {
                 fullWidth
                 placeholder="username"
                 variant="standard"
+                defaultValue='johnd'
                 type="text"
                 name="username"
                 {...register("username", {
@@ -132,6 +133,7 @@ export default function Login() {
               <TextField
                 fullWidth
                 placeholder="Password"
+                defaultValue='m38rmF$'
                 type="password"
                 name="password"
                 variant="standard"
