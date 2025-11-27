@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Box, Typography } from "@mui/material";
-import MyButton from "../common/Primary_Button";
+import MyButton from "../../components/common/Primary_Button";
+import { Link as RouterLink } from "react-router-dom"; 
+
+
 
 export default function NotFound_Page() {
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+    
   return (
     <>
       <Container maxWidth="xl" sx={{}}>
@@ -14,7 +23,7 @@ export default function NotFound_Page() {
             <Typography variant="body1" my='20px' mb='50px'>
               Your visited page not found. You may go home page.
             </Typography>
-            <MyButton sx={{px:'20px'}}>Back to home page</MyButton>
+            <MyButton component={RouterLink} to="/" sx={{px:'20px'}}>Back to home page</MyButton>
 
           </Box>
         </Box>

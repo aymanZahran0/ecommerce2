@@ -1,68 +1,34 @@
-import { createTheme, CssBaseline, ThemeProvider, Container } from '@mui/material'
-import { useState } from 'react'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import './App.css'
-import Footer from './components/common/Footer'
-import Navbar from './components/common/Navbar'
-import Home from './components/home/Home.jsx'
-import About from './components/about/About.jsx'
-import Contact from './components/contact/Contact.jsx'
-import Login from './components/login/Login'
-import NotFound_Page from './components/notFound_page/NotFound_Page'
-import Register from './components/register/Register'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import Layout from './components/layout/Layout'
+import { RouterProvider} from 'react-router-dom';
+import My_Theme from './styles/My_Theme'
+import routers from './routes/Routers'
+import { useDispatch } from "react-redux";
+import { getUserById } from './api/Auth_api';
+import { useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 
 function App() {
 
-  const myTheme = createTheme({
-    palette:{
-      mainColor:{
-        main:'#DB4444',
-      },
-      mutedColor:{
-        main:'#AFAFAF'
-      }
-    },
-    typography:{
-      fontFamily: ["Helvetica", "Arial", "sans-serif"].join(","),
-      
+  const token = localStorage.getItem('myToken')
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getUserById());
     }
-  });
+  }, [token,dispatch]);
 
-
-
-
-  let routers= createBrowserRouter([
-    {path :'/' ,element : <Layout /> , children :[          //  , errorElement: <NotFound/>
-    {path : 'home' , element: <Home/>},
-    {path : 'about' , element:<About/>  },
-    {path : 'contact' , element:<Contact/>  },
-    {path : 'login' , element: <Login/>},
-    {index : true , element: <Register/>},
-    {path : '*' , element: <NotFound_Page/>},
-    ] },
-  ]);
-
+  
   return (
     <>
-    <ThemeProvider theme ={myTheme}>
-      <CssBaseline/>
-      {/* <Navbar/> */}
-
-      <RouterProvider router ={routers}/>
-
-      {/* <Container maxWidth="xl" sx={{mt:'50px',}}>
-
-      </Container>
-      <Register/>
-      <NotFound_Page/>
-      <Footer/> */}
-
-    </ThemeProvider>
-  
+      <ThemeProvider theme ={My_Theme}>
+        <CssBaseline/>
+        <RouterProvider router ={routers}/>
+      </ThemeProvider>
     </>
   )
 }

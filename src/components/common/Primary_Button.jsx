@@ -1,9 +1,8 @@
-import React from 'react'
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
 
-    const MyButton = styled(Button)( () => ({
+    const Primary_Button = styled(Button)( () => ({
 
         backgroundColor: "#DB4444",
         color: "#fff",
@@ -17,4 +16,4 @@ import { styled } from "@mui/material/styles";
         },
       }));
 
-      export default MyButton;
+      export default Primary_Button;
