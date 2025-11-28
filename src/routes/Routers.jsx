@@ -11,6 +11,7 @@ import ProtecedAuthRoute from '../components/ProtecedAuthRoute';
 import My_Account from '../pages/my_account/My_Account';
 import Cart from '../pages/cart/Cart';
 import Wishlist from '../pages/wishlist/Wishlist';
+import CategoryPage from '../pages/categoryPage/CategoryPage';
 
 
 let routers= createBrowserRouter([
@@ -21,6 +22,7 @@ let routers= createBrowserRouter([
     {path : 'account' , element:<ProtecedRoute><My_Account /></ProtecedRoute>  },
     {path : 'cart' , element:<ProtecedRoute><Cart /></ProtecedRoute>  },
     {path : 'Wishlist' , element:<ProtecedRoute><Wishlist /></ProtecedRoute>  },
+    {path : 'category/:categoryName' , element:<ProtecedRoute><CategoryPage /></ProtecedRoute>  },
     {path : 'login' , element: <ProtecedAuthRoute><Login/></ProtecedAuthRoute>},
     {path : 'register', element: <ProtecedAuthRoute><Register/></ProtecedAuthRoute> },
     {path : '*' , element: <NotFound_Page/>},
