@@ -28,6 +28,7 @@ export default function SidePar() {
     console.log(allProducts)
   }, []);
 
+  
   return (
     <>
       <Box>
