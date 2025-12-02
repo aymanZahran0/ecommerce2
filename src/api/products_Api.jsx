@@ -40,4 +40,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
      }
    }
  );
+
+//  getProductById for wishlist
+ export const getProductById_Details = createAsyncThunk( "products/getProductById_Details",async (id, { rejectWithValue }) => {
+     try {
+       const {data} = await  axiosInstance.get(`/products/${id}`)
+       console.log(data)
+       return data;
+     } catch (err) {
+       return rejectWithValue( err.response.data);
+     }
+   }
+ );
  

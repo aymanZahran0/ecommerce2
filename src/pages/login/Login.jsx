@@ -81,7 +81,7 @@ export default function Login() {
     <>
     <ToastContainer />
 
-      <Box sx={{}}>
+      <Box sx={{mx:{xs:'20px'}}}>
         <Grid container spacing={2}>
           {/* 1 */}
           <Grid size={{ lg: 7, md: 0, xs: 0 }} sx={{}}>
@@ -110,9 +110,10 @@ export default function Login() {
             </Typography>
 
             {/* form */}
-            <Box component="form" onSubmit={handleSubmit(submitLoginForm)}>
+            <Box  component="form" onSubmit={handleSubmit(submitLoginForm)}>
               
               <TextField
+                
                 fullWidth
                 placeholder="username"
                 variant="standard"
@@ -128,7 +129,7 @@ export default function Login() {
                 })}
                 error={errors.username}
                 helperText={errors.username?.message}
-                sx={{ display: "block", my: "20px" }}
+                sx={{ display: "block", my: "20px", 'input':{pl:'15px'}}}
               />
               <TextField
                 fullWidth
@@ -146,6 +147,7 @@ export default function Login() {
                 })}
                 error={errors.password}
                 helperText={errors.password?.message}
+                 sx={{ 'input':{pl:'15px'}}}
               />
 
               {errorMessage?.length > 0 ? (

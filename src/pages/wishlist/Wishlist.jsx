@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
@@ -15,6 +15,10 @@ import Primary_Button from "../../components/common/Primary_Button";
 import Delete_Icon from "../../assets/svgComponents/wishlist/Delete_Icon";
 import { getProductById_Cart } from "../../api/products_Api";
 import { getProductById_Wishlist} from "../../api/products_Api";
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import { removeWishlistItem } from "../../redux/wishlistSlice";
+import { removeCartItem } from "../../redux/cartSlice";
+
 
 
 export default function Wishlist() {
@@ -27,6 +31,8 @@ export default function Wishlist() {
   const items = useSelector((state) => state.wishlist.items);
   const uniqueItems = [...new Map(items.map(i => [i.id, i])).values()];
   console.info(uniqueItems);
+  const [toggleCart, setToggleCart] = useState({});
+
 
   useEffect(() => {
     console.info(items);
@@ -35,13 +41,20 @@ export default function Wishlist() {
 
   
     // add to cart
-      const addToCart = (id) => {
-      try {
-        dispatch( getProductById_Cart(id));
-      } catch (error) {
-        console.log(error);
-      }
-    };
+         const addToCart = (id) => {
+           const current = toggleCart[id];
+             if (!current) {
+               dispatch(getProductById_Cart(id));
+             } else {
+               dispatch(removeCartItem(id));
+             }
+           
+             setToggleCart((prev) => ({
+               ...prev,
+               [id]: !prev[id], // toggle for that product only
+             }));
+         };
+  
   
 
   return (
@@ -84,7 +97,7 @@ export default function Wishlist() {
           </Button>
         </Box>
 
-        <Grid container spacing={4} mb='40px'>
+        { uniqueItems.length>0 ?<Grid container spacing={4} mb='40px'>
           {uniqueItems ? (
             // items.length > 0 ? (
             uniqueItems.map((product, index) => (
@@ -123,7 +136,7 @@ export default function Wishlist() {
                     sx={{ position: "absolute", top: "10px", right: "10px" }}
                   >
                     <Button
-                      
+                      onClick={()=>{ dispatch(removeWishlistItem(product.id));}}
                       sx={{ cursor: "pointer", mb: "5px" }}
                     >
                       <Delete_Icon />
@@ -161,7 +174,7 @@ export default function Wishlist() {
                     }}
                     onClick={() => addToCart(product.id)}
                   >
-                    Add To Cart
+                   { toggleCart[product.id]? 'Cancle' :  ' Add To Cart'}
                   </Button>
                 </Box>
                 <Box>
@@ -214,6 +227,17 @@ export default function Wishlist() {
             // <Typography variant="h5" color=""> Loading... </Typography>
           )}
         </Grid>
+        :
+        <>
+        <Box sx={{display:'flex', justifyContent:'center', alignItems:'center' ,mb:'40px'}}>
+         <Typography variant="h6" color="error" sx={{pr:'10px'}}>Your WishList is empty</Typography>
+          <HeartBrokenIcon color="error" sx={{textAlign:''}}/>
+        </Box>
+           
+        </>
+      
+        }
+
       </Container>
     </>
   );

@@ -18,11 +18,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import MusicSvg from "../../assets/svgComponents/MusicSvg";
 import { ToastContainer, toast } from "react-toastify";
-import { getProductById_Cart } from "../../api/products_Api";
-import { getProductById_Wishlist} from "../../api/products_Api";
+import { getProductById_Cart, getProductById_Details } from "../../api/products_Api";
+import { getProductById_Wishlist } from "../../api/products_Api";
 import { useNavigate } from "react-router-dom";
-
-
+import { removeWishlistItem } from "../../redux/wishlistSlice";
+import { removeCartItem } from "../../redux/cartSlice";
 
 export default function Best_Selling_Products() {
   const [value, setValue] = useState(
@@ -32,7 +32,11 @@ export default function Best_Selling_Products() {
   const [viewAll, setViewAll] = useState(4);
   const [toggleViewAll, setToggleViewAll] = useState(false);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch()
+  const [toggleHeartColor, setToggleHeartColor] = useState({});
+  const [toggleCart, setToggleCart] = useState({});
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   async function getProductData() {
     try {
@@ -63,23 +67,41 @@ export default function Best_Selling_Products() {
   }
 
   // add to cart
-    const addToCart = (id) => {
-    try {
-      dispatch( getProductById_Cart(id));
-    } catch (error) {
-      console.log(error);
+  const addToCart = (id) => {
+    const current = toggleCart[id];
+    if (!current) {
+      dispatch(getProductById_Cart(id));
+    } else {
+      dispatch(removeCartItem(id));
     }
+
+    setToggleCart((prev) => ({
+      ...prev,
+      [id]: !prev[id], // toggle for that product only
+    }));
   };
 
-  // add to wishlist
-    const addToWishlist = (id) => {
-    try {
-      dispatch( getProductById_Wishlist(id));
-    } catch (error) {
-      console.log(error);
+  // heart icon
+  const toggleHeart = (id) => {
+    const current = toggleHeartColor[id];
+
+    if (!current) {
+      dispatch(getProductById_Wishlist(id));
+    } else {
+      dispatch(removeWishlistItem(id));
     }
+
+    setToggleHeartColor((prev) => ({
+      ...prev,
+      [id]: !prev[id], // toggle for that product only
+    }));
   };
-  
+
+  // eye icon
+  const detailsItem = (id) => {
+    dispatch(getProductById_Details(id));
+    navigate("/detailsitem");
+  };
 
   return (
     <>
@@ -161,10 +183,26 @@ export default function Best_Selling_Products() {
                   <Box
                     sx={{ position: "absolute", top: "10px", right: "10px" }}
                   >
-                    <Button onClick={() => addToWishlist(product.id)}sx={{ cursor: "pointer", mb: "5px" }}>
-                      <Heart_Icon/>
+                    <Button
+                      onClick={() => toggleHeart(product.id)}
+                      sx={{ cursor: "pointer", mb: "5px" }}
+                    >
+                      <Heart_Icon
+                        fill={
+                          toggleHeartColor[product.id] ? "red" : "transparent"
+                        }
+                      />
                     </Button>
-                    <Button sx={{ cursor: "pointer" ,display:'block'}}>
+                    <Button
+                      onClick={() => {
+                        detailsItem(product.id);
+                      }}
+                      sx={{
+                        cursor: "pointer",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
                       <Eye_Icon />
                     </Button>
                   </Box>
@@ -195,12 +233,12 @@ export default function Best_Selling_Products() {
                       mt: "0px",
                       py: "5px",
                       textAlign: "center",
-                      cursor: "pointer",  
-                      textTransform: "revert", 
+                      cursor: "pointer",
+                      textTransform: "revert",
                     }}
                     onClick={() => addToCart(product.id)}
                   >
-                    Add To Cart
+                    {toggleCart[product.id] ? "Cancle" : " Add To Cart"}
                   </Button>
                 </Box>
                 <Box>
@@ -229,35 +267,34 @@ export default function Best_Selling_Products() {
           ) : (
             <>
               <Grid size={{ lg: 3, md: 4, xs: 6 }}>
-              <Box>
-                <Skeleton variant="rectangular" width="100%" height={200} />
-               <Skeleton width="90%" />
-                <Skeleton width="30%" />
-              </Box>
-            </Grid>
-            <Grid size={{ lg: 3, md: 4, xs: 6 }}>
-              <Box>
-                <Skeleton variant="rectangular" width="100%" height={200} />
-               <Skeleton width="90%" />
-                <Skeleton width="30%" />
-              </Box>
-            </Grid>
-            <Grid size={{ lg: 3, md: 4, xs: 6 }}>
-              <Box>
-                <Skeleton variant="rectangular" width="100%" height={200} />
-                <Skeleton width="90%" />
-                <Skeleton width="30%" />
-              </Box>
-            </Grid>
-            
-            <Grid size={{ lg: 3, md: 4, xs: 6 }}>
-              <Box>
-                <Skeleton variant="rectangular" width="100%" height={200} />
-                <Skeleton width="90%" />
-                <Skeleton width="30%" />
-              </Box>
-            </Grid>
-            
+                <Box>
+                  <Skeleton variant="rectangular" width="100%" height={200} />
+                  <Skeleton width="90%" />
+                  <Skeleton width="30%" />
+                </Box>
+              </Grid>
+              <Grid size={{ lg: 3, md: 4, xs: 6 }}>
+                <Box>
+                  <Skeleton variant="rectangular" width="100%" height={200} />
+                  <Skeleton width="90%" />
+                  <Skeleton width="30%" />
+                </Box>
+              </Grid>
+              <Grid size={{ lg: 3, md: 4, xs: 6 }}>
+                <Box>
+                  <Skeleton variant="rectangular" width="100%" height={200} />
+                  <Skeleton width="90%" />
+                  <Skeleton width="30%" />
+                </Box>
+              </Grid>
+
+              <Grid size={{ lg: 3, md: 4, xs: 6 }}>
+                <Box>
+                  <Skeleton variant="rectangular" width="100%" height={200} />
+                  <Skeleton width="90%" />
+                  <Skeleton width="30%" />
+                </Box>
+              </Grid>
             </>
             // <Typography variant="h5" color=""> Loading... </Typography>
           )}
@@ -391,7 +428,6 @@ export default function Best_Selling_Products() {
           </Box>
         </Box>
       </Box>
-
     </>
   );
 }

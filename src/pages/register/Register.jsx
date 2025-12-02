@@ -76,7 +76,7 @@ export default function Register() {
   return (
     <>
     <ToastContainer/>
-      <Box sx={{}}>
+      <Box sx={{mx:{xs:'20px'}}}>
         <Grid container spacing={2}>
           {/* 1 */}
           <Grid size={{ lg: 7, md: 0, xs: 0 }} sx={{}}>
@@ -115,7 +115,7 @@ export default function Register() {
                 {...register("email", {
                   required: "Email is required",
                 })}
-                sx={{ mt: "25px" }}
+                sx={{ mt: "25px", 'input':{pl:'15px'}}}
                 error={errors.email}
                 helperText={errors.email?.message}
               />
@@ -133,7 +133,7 @@ export default function Register() {
                     message: "At least 2 characters",
                   },
                 })}
-                sx={{ display: "block", mt: "20px" }}
+                sx={{ display: "block", mt: "20px",'input':{pl:'15px'} }}
                 error={errors.username}
                 helperText={errors.username?.message}
               />
@@ -152,7 +152,7 @@ export default function Register() {
                     message: "Minimum 5 characters",
                   },
                 })}
-                sx={{ display: "block", mt: "20px" }}
+                sx={{ display: "block", mt: "20px", 'input':{pl:'15px'} }}
                 error={errors.password}
                 helperText={errors.password?.message}
               />

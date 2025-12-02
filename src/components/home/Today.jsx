@@ -26,7 +26,11 @@ import Eye_Icon from "../../assets/svgComponents/product_Icon/Eye_Icon";
 import Primary_Button from "../common/Primary_Button";
 import { getProductById_Cart } from "../../api/products_Api";
 import { getProductById_Wishlist} from "../../api/products_Api";
+import { getProductById_Details} from "../../api/products_Api";
 import { useDispatch, useSelector } from "react-redux";
+import { removeWishlistItem } from "../../redux/wishlistSlice";
+import { removeCartItem } from "../../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Today() {
@@ -36,6 +40,9 @@ export default function Today() {
   const [allProducts, setAllProducts] = useState([]);
   const [viewAll, setViewAll] = useState(4);
   const dispatch = useDispatch();
+ const [toggleHeartColor, setToggleHeartColor] = useState({});
+ const [toggleCart, setToggleCart] = useState({});
+ const navigate = useNavigate();
 
   async function getProductData() {
     try {
@@ -53,24 +60,46 @@ export default function Today() {
   }, []);
 
 
-   // add to cart
-        const addToCart = (id) => {
-        try {
-          dispatch( getProductById_Cart(id));
-        } catch (error) {
-          console.log(error);
-        }
-      };
+
     
-        // add to wishlist
-          const addToWishlist = (id) => {
-          try {
-            dispatch( getProductById_Wishlist(id));
-          } catch (error) {
-            console.log(error);
+      // add to cart
+         const addToCart = (id) => {
+           const current = toggleCart[id];
+             if (!current) {
+               dispatch(getProductById_Cart(id));
+             } else {
+               dispatch(removeCartItem(id));
+             }
+           
+             setToggleCart((prev) => ({
+               ...prev,
+               [id]: !prev[id], // toggle for that product only
+             }));
+         };
+    
+      
+        // heart icon
+        const toggleHeart = (id) => {
+          const current = toggleHeartColor[id];
+      
+          if (!current) {
+            dispatch(getProductById_Wishlist(id));
+          } else {
+            dispatch(removeWishlistItem(id));
           }
+      
+          setToggleHeartColor((prev) => ({
+            ...prev,
+            [id]: !prev[id], // toggle for that product only
+          }));
         };
-        
+
+        // eye icon
+        const detailsItem = (id) => {
+            dispatch(getProductById_Details(id));
+            navigate('/detailsitem')
+          }
+
 
 
   return (
@@ -277,12 +306,14 @@ export default function Today() {
                           right: "10px",
                         }}
                       >
-                        <Button onClick={() => addToWishlist(product.id)} sx={{ cursor: "pointer", mb: "5px" }}>
-                          <Heart_Icon />
+                        <Button onClick={() => toggleHeart(product.id)} sx={{ cursor: "pointer", mb: "5px" }}>
+                          <Heart_Icon  fill={
+                          toggleHeartColor[product.id] ? "red" : "transparent"
+                        }/>
                         </Button>
-                        <Box  sx={{ cursor: "pointer" ,display:'flex', justifyContent:'center'}}>
+                        <Button onClick={()=>{detailsItem(product.id)}} sx={{ cursor: "pointer" ,display:'flex', justifyContent:'center'}}>
                           <Eye_Icon />
-                        </Box>
+                        </Button>
                       </Box>
 
                       <Box>
@@ -316,7 +347,7 @@ export default function Today() {
                         }}
                         onClick={() => addToCart(product.id)}
                       >
-                        Add To Cart
+                       { toggleCart[product.id]? 'Cancle' :  ' Add To Cart'}
                       </Box>
                     </Box>
                     <Box>

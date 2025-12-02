@@ -7,11 +7,11 @@ import axiosInstance from "../../api/axiosInstance";
 import { useNavigate } from "react-router-dom"; //  conflict اعدت تسميته لعدم حدوث
 
 
-
 export default function SidePar() {
   const [allProducts, setAllProducts] = useState([]);
   const uniqueItems = [...new Map(allProducts.map(item => [item.category, item])).values()];
   const navigate= useNavigate()
+  
   async function getProductData() {
     try {
       const { data } = await axiosInstance.get("/products");

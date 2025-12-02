@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {Man,Woman,TvOutlined,BeachAccessOutlined,HeadsetOutlined } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -31,6 +32,9 @@ export default function Categories() {
     { name: "HeadPhones", icon: <HeadsetOutlined sx={{fontSize:'40px'}}/> },
     { name: "Gaming", icon: <AccessAlarmsIcon sx={{fontSize:'40px'}}/> },
   ];
+
+   const navigate= useNavigate()
+   
   return (
     <>
       <ToastContainer />
@@ -42,7 +46,7 @@ export default function Categories() {
             alignItems="center"
             justifyContent="space-between"
             mb={4}
-          >
+          > 
             <Box sx={{width:'100%'}}>
               <Stack direction="row" spacing={2}>
                 <Typography
@@ -98,6 +102,7 @@ export default function Categories() {
             {categories.map((cat, index) => (
               <SwiperSlide key={index}>
                 <Card
+                 onClick={()=>{navigate(`category/${cat.name}`)}}
                   sx={{
                     borderRadius: 3,
                     textAlign: "center",

@@ -12,6 +12,9 @@ import My_Account from '../pages/my_account/My_Account';
 import Cart from '../pages/cart/Cart';
 import Wishlist from '../pages/wishlist/Wishlist';
 import CategoryPage from '../pages/categoryPage/CategoryPage';
+import CheckOut from '../pages/checkOut/CheckOut';
+import DetailsItem from '../pages/detailsItem/DetailsItem';
+import BuyNow_onProduct from '../pages/checkOut/BuyNow_onProduct';
 
 
 let routers= createBrowserRouter([
@@ -22,6 +25,9 @@ let routers= createBrowserRouter([
     {path : 'account' , element:<ProtecedRoute><My_Account /></ProtecedRoute>  },
     {path : 'cart' , element:<ProtecedRoute><Cart /></ProtecedRoute>  },
     {path : 'Wishlist' , element:<ProtecedRoute><Wishlist /></ProtecedRoute>  },
+    {path : 'checkout' , element:<ProtecedRoute><CheckOut /></ProtecedRoute>  },
+    {path : 'detailsitem' , element:<ProtecedRoute><DetailsItem /></ProtecedRoute>  },
+    {path : 'buynow' , element:<ProtecedRoute><BuyNow_onProduct/></ProtecedRoute>  },
     {path : 'category/:categoryName' , element:<ProtecedRoute><CategoryPage /></ProtecedRoute>  },
     {path : 'login' , element: <ProtecedAuthRoute><Login/></ProtecedAuthRoute>},
     {path : 'register', element: <ProtecedAuthRoute><Register/></ProtecedAuthRoute> },
