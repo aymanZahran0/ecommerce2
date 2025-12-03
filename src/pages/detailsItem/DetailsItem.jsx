@@ -85,14 +85,19 @@ export default function DetailsItem() {
               }}
             >
               {/* 1 */}
-              <Box sx={{ display: "flex" }}>
-                <Box sx={{ m: { md: "1px", xs: "auto" } }}>
+              <Box sx={{ display: "flex", justifyContent:'center' }}>
+                <Box 
+                 sx={{ 
+                    // m: { md: "1px", xs: "auto" },
+
+                 }}
+                 >
                   <Box
                     component="img"
                     src={item.image}
                     sx={{
                       width: "100px",
-                      height: "130px",
+                      height: { sm: "130px", xs: "70px" },
                       mr: "15px",
                       backgroundColor: "#F5F5F5",
                       p: "10px",
@@ -107,7 +112,7 @@ export default function DetailsItem() {
                     src={item.image}
                     sx={{
                       width: "100px",
-                      height: "130px",
+                      height: { sm: "130px", xs: "70px" },
                       mr: "15px",
                       backgroundColor: "#F5F5F5",
                       p: "10px",
@@ -122,7 +127,7 @@ export default function DetailsItem() {
                     src={item.image}
                     sx={{
                       width: "100px",
-                      height: "130px",
+                      height: { sm: "130px", xs: "70px" },
                       mr: "15px",
                       backgroundColor: "#F5F5F5",
                       p: "10px",
@@ -137,7 +142,7 @@ export default function DetailsItem() {
                     src={item.image}
                     sx={{
                       width: "100px",
-                      height: "130px",
+                      height: { sm: "130px", xs: "70px" },
                       mr: "15px",
                       backgroundColor: "#F5F5F5",
                       p: "10px",
@@ -153,14 +158,16 @@ export default function DetailsItem() {
                     backgroundColor: "#F5F5F5",
                     display: "flex",
                     alignItems: "center",
+                    justifyContent: "center",
+                    // m: { md: "1px", xs: "auto" }
                   }}
                 >
                   <Box
                     component="img"
                     src={item.image}
                     sx={{
-                      width: { sm: "400px", xs: "250px" },
-                      height: "340px",
+                      width: { sm: "400px", xs: "100%" },
+                      height: { sm: "340px", xs: "250px" },
                       mr: "15px",
                       p: "10px",
                       borderRadius: "5px",
@@ -297,7 +304,7 @@ export default function DetailsItem() {
                       navigate("/buynow");
                     }}
                   >
-                    Buy Now
+                    BuyNow
                   </Primary_Button>
 
                   <Box

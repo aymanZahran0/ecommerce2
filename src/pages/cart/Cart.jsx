@@ -213,6 +213,7 @@ console.log(totalPrice)
                 display: "flex",
                 justifyContent: "space-between",
                 mb: "50px",
+                mt: {md:"0px", xs:'20px'},
               }}
             >
               {/* 1 */}
@@ -221,9 +222,9 @@ console.log(totalPrice)
                 color="text"
                 sx={{
                   textTransform: "revert",
-                  px: "50px",
+                  px: {sm:"50px",xs:'10px'},
                   py: "10px",
-                  fontSize: "16px",
+                  fontSize: {sm:"16px", xs:'14px'},
                 }}
               >
                 Return to Shop
@@ -235,9 +236,9 @@ console.log(totalPrice)
                 color="text"
                 sx={{
                   textTransform: "revert",
-                  px: "50px",
+                  px: {sm:"50px",xs:'10px'},
                   py: "10px",
-                  fontSize: "16px",
+                  fontSize: {sm:"16px", xs:'14px'},
                 }}
               >
                 Update Cart
@@ -252,8 +253,8 @@ console.log(totalPrice)
                 justifyContent: "space-between",
               }}
             >
-              <Box sx={{ width: { lg: "60%", xs:'100%'}, mb:'20px' }}>
-                <TextField size="small" placeholder="Coupon Code" />
+              <Box sx={{ width: { lg: "60%", xs:'100%'}, mb:'20px',  }}>
+                <TextField size="small" placeholder="Coupon Code" sx={{width:{sm:'40%', xs:'50%'}}}/>
                 <Primary_Button sx={{ py: "5px", px: {md:'40px'}, ml: "10px", fontWeight:'500' }}>
                   Apply Coupon
                 </Primary_Button>

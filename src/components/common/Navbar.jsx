@@ -163,7 +163,7 @@ export default function Navbar() {
                 </MenuItem>
               </Menu>
             </Box>
-
+{/* 
             <Typography
               variant="h6"
               noWrap
@@ -171,7 +171,7 @@ export default function Navbar() {
               sx={{ display: { xs: "block", sm: "block" } }}
             >
               Exclusive
-            </Typography>
+            </Typography> */}
 
             <Box
               sx={{

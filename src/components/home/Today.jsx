@@ -159,7 +159,7 @@ export default function Today() {
           <Box>
             <Box
               sx={{
-                display: "flex",
+                display: {sm:"flex"},
                 justifyContent: "space-between",
                 my: "20px",
               }}

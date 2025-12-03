@@ -123,7 +123,7 @@ export default function Our_Products() {
               mt: "20px",
             }}
           >
-            <Typography variant="h3">Explore Our Products</Typography>
+            <Typography variant="h3" sx={{fontSize:{md:'40px', xs:'25px'}}}>Explore Our Products</Typography>
             <Box>
               {/* <Primary_Button onClick={ViewProducts} sx={{px:'30px'}}>
                     {toggleViewAll===false? 'View All':'View less'}

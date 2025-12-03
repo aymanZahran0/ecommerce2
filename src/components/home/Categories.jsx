@@ -63,8 +63,8 @@ export default function Categories() {
                 </Typography>
               </Stack>
 
-              <Box sx={{ display: "flex" ,justifyContent:'space-between',mt:"20px"}}>
-                <Typography variant="h3" fontWeight={""}sx={{fontSize:{xs:'25px',sm:'30px',md:'45px'}}}>
+              <Box sx={{ display: {sm:"flex" },justifyContent:'space-between',mt:"20px"}}>
+                <Typography variant="h3" sx={{fontSize:{xs:'25px',sm:'30px',md:'45px'}}}>
                   Browse By Category
                 </Typography>
 

@@ -267,7 +267,7 @@ export default function Features() {
             <Typography
               variant="h5"
               fontWeight={700}
-              sx={{ textAlign: "center", mt: "20px" }}
+              sx={{ textAlign: "center", mt: "20px", fontSize:{md:'25px', xs:'16px'} }}
             >
               FREE AND FAST DELIVERY
             </Typography>
@@ -308,7 +308,7 @@ export default function Features() {
             <Typography
               variant="h5"
               fontWeight={700}
-              sx={{ textAlign: "center", mt: "20px" }}
+              sx={{ textAlign: "center", mt: "20px", fontSize:{md:'25px', xs:'16px'} }}
             >
               24/7 CUSTOMER SERVICE
             </Typography>
@@ -349,7 +349,7 @@ export default function Features() {
             <Typography
               variant="h5"
               fontWeight={700}
-              sx={{ textAlign: "center", mt: "20px" }}
+              sx={{ textAlign: "center", mt: "20px", fontSize:{md:'25px', xs:'16px'}  }}
             >
               MONEY BACK GUARANTEE
             </Typography>

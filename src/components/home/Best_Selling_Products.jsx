@@ -123,17 +123,17 @@ export default function Best_Selling_Products() {
               this Month
             </Typography>
           </Stack>
-
+          
           <Box
             sx={{
-              display: "flex",
+              display: {sm:"flex"},
               justifyContent: "space-between",
               mt: "20px",
             }}
           >
             <Typography
               variant="h3"
-              sx={{ fontSize: { xs: "25px", sm: "30", md: "45px" } }}
+              sx={{ fontSize: { xs: "25px", sm: "30", md: "45px" }, mb:{sm:'0px', xs:'20px'} }}
             >
               Best Selling Products
             </Typography>
