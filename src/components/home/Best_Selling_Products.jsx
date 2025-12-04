@@ -54,6 +54,7 @@ export default function Best_Selling_Products() {
       return err.response.data;
     }
   }
+  
   useEffect(() => {
     getProductData();
   }, []);

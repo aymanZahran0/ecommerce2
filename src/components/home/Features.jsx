@@ -1,5 +1,12 @@
-import React from "react";
-import { Typography, Box, Stack, Grid, useScrollTrigger,Link } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Typography,
+  Box,
+  Stack,
+  Grid,
+  useScrollTrigger,
+  Link,
+} from "@mui/material";
 import Delivery_Icon from "../../assets/svgComponents/features/Delivary_Icon.jsx";
 import Customer_Service from "../../assets/svgComponents/features/Customer_Service.jsx";
 import Secure_Icon from "../../assets/svgComponents/features/Secure_Icon.jsx";
@@ -7,11 +14,31 @@ import Playstation from "../../assets/svgComponents/features/Playstation.svg";
 import Speakers from "../../assets/svgComponents/features/Speakers.svg";
 import Perfume from "../../assets/svgComponents/features/Perfume.svg";
 import Women from "../../assets/svgComponents/features/Women.svg";
-import { Link as RouterLink } from "react-router-dom";
- 
-
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axiosInstance from "../../api/axiosInstance.js";
+import { getProductById_Details } from "../../api/products_Api.jsx";
 
 export default function Features() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [allProducts, setAllProducts] = useState([]);
+
+  async function getProductData() {
+    try {
+      const { data } = await axiosInstance.get("/products");
+      setAllProducts(data);
+      return data;
+    } catch (err) {
+      console.log(err);
+      return err.response.data;
+    }
+  }
+
+  useEffect(() => {
+    getProductData();
+  }, []);
+
   return (
     <>
       <Box sx={{ my: "40px" }}>
@@ -41,6 +68,7 @@ export default function Features() {
                 <Box
                   component="img"
                   src={Playstation}
+                  // src={allProducts[11].image}
                   sx={{
                     backgroundColor: "black",
                     borderRadius: "5px",
@@ -69,10 +97,13 @@ export default function Features() {
                   </Typography>
                   <Typography
                     variant="h6"
-                    to="/"
                     sx={{ textDecoration: "underline", cursor: "pointer" }}
                     my="20px"
                     color="white"
+                    onClick={() => {
+                      navigate("/buynow");
+                      dispatch(getProductById_Details(10));
+                    }}
                   >
                     Shop Now
                   </Typography>
@@ -95,45 +126,54 @@ export default function Features() {
                   justifyContent: "right",
                 }}
               >
-                <Box sx={{ position: "relative" }}>
+                <Box sx={{ position: "relative", width: "100%" }}>
+                  <Box sx={{ display: "flex", justifyContent: "right" }}>
+                    <Box
+                      component="img"
+                      // src={Women}
+                      src={allProducts[2]?.image}
+                      sx={{
+                        backgroundColor: "black",
+                        borderRadius: "5px",
+                        width: "60%",
+                        height: "300px",
+                        cursor: "pointer",
+                      }}
+                    ></Box>
+                  </Box>
+
                   <Box
-                    component="img"
-                    src={Women}
                     sx={{
-                      backgroundColor: "black",
-                      borderRadius: "5px",
-                      width:"100%",
-                      height: "300px",
-                      cursor: "pointer",
+                      ml: "20px",
+                      position: "absolute",
+                      bottom: "30px",
+                      left: "0px",
+                      color: "white",
                     }}
-                  ></Box>
-                  <Box
-                  sx={{
-                    ml: "20px",
-                    position: "absolute",
-                    bottom: "30px",
-                    left: "0px",
-                    color: "white",  
-                  }}
-                >
-                  <Typography variant="h4" my="15px" color="">
-                     Women's Collections
-                  </Typography>
-                  <Typography variant="body2" color="">
-                  Featured woman collections that 
-                  </Typography>
-                  <Typography variant="body2" color="">
-                    give you another vibe.
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    to="/"
-                    sx={{ textDecoration: "underline", cursor: "pointer" }}
-                    my="20px"
-                    color="white"
                   >
-                    Shop Now
-                  </Typography>
+                    <Typography variant="h4" my="15px" color="">
+                           {allProducts[2]?.title.length > 20
+                    ? allProducts[2]?.title.slice(0, 10) + "..."
+                    : allProducts[2]?.title}
+                    </Typography>
+                    <Typography variant="body2" color="">
+                      Featured man collections that
+                    </Typography>
+                    <Typography variant="body2" color="">
+                      give you another vibe.
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{ textDecoration: "underline", cursor: "pointer" }}
+                      my="20px"
+                      color="white"
+                      onClick={() => {
+                        navigate("/buynow");
+                        dispatch(getProductById_Details(3));
+                      }}
+                    >
+                      Shop Now
+                    </Typography>
                   </Box>
                 </Box>
               </Grid>
@@ -145,7 +185,8 @@ export default function Features() {
                 <Box sx={{ position: "relative" }}>
                   <Box
                     component="img"
-                    src={Speakers}
+                    // src={Speakers}
+                    src={allProducts[14]?.image}
                     sx={{
                       backgroundColor: "black",
                       borderRadius: "5px",
@@ -155,31 +196,36 @@ export default function Features() {
                       cursor: "pointer",
                     }}
                   ></Box>
-                   <Box
-                  sx={{
-                    ml: "20px",
-                    position: "absolute",
-                    bottom: "30px",
-                    left: "0px",
-                    color: "white",  
-                  }}
-                >
-                  <Typography variant="h4" my="10px" color="">
-                     Speakers
-                  </Typography>
-                  <Typography variant="body2" color="">
-                     Amazon wireless speakers
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    to="/"
-                    sx={{ textDecoration: "underline", cursor: "pointer" }}
-                    my="10px"
-                    color="white"
+                  <Box
+                    sx={{
+                      ml: "20px",
+                      position: "absolute",
+                      bottom: "30px",
+                      left: "0px",
+                      color: "white",
+                    }}
                   >
-                    Shop Now
-                  </Typography>
-                   </Box>
+                    <Typography variant="h4" my="10px" color="">
+                      {allProducts[14]?.title.length > 20
+                        ? allProducts[14]?.title.slice(0, 10) + "..."
+                        : allProducts[14]?.title}
+                    </Typography>
+                    <Typography variant="body2" color="">
+                      Jacket for womans
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{ textDecoration: "underline", cursor: "pointer" }}
+                      my="20px"
+                      color="white"
+                      onClick={() => {
+                        navigate("/buynow");
+                        dispatch(getProductById_Details(15));
+                      }}
+                    >
+                      Shop Now
+                    </Typography>
+                  </Box>
                 </Box>
               </Grid>
 
@@ -190,7 +236,8 @@ export default function Features() {
                 <Box sx={{ position: "relative" }}>
                   <Box
                     component="img"
-                    src={Perfume}
+                    // src={Perfume}
+                    src={allProducts[5]?.image}
                     sx={{
                       backgroundColor: "black",
                       borderRadius: "5px",
@@ -202,33 +249,37 @@ export default function Features() {
                     }}
                   ></Box>
                   <Box
-                  sx={{
-                    ml: "20px",
-                    position: "absolute",
-                    bottom: "30px",
-                    left: "0px",
-                    color: "white",  
-                  }}
-                >
-                  <Typography variant="h4" my="10px" color="">
-                     Perfume
-                  </Typography>
-                  <Typography variant="body2" color="">
-                     GUCCI INTENSE OUD EDP
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    to="/"
-                    sx={{ textDecoration: "underline", cursor: "pointer" }}
-                    my="10px"
-                    color="white"
+                    sx={{
+                      ml: "20px",
+                      position: "absolute",
+                      bottom: "30px",
+                      left: "0px",
+                      color: "white",
+                    }}
                   >
-                    Shop Now
-                  </Typography>
-                   </Box>
+                    <Typography variant="h4" my="10px" color="">
+                      {allProducts[5]?.title.length > 20
+                        ? allProducts[5]?.title.slice(0, 10) + "..."
+                        : allProducts[5]?.title}
+                    </Typography>
+                    <Typography variant="body2" color="">
+                      {allProducts[5]?.category}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{ textDecoration: "underline", cursor: "pointer" }}
+                      my="20px"
+                      color="white"
+                      onClick={() => {
+                        navigate("/buynow");
+                        dispatch(getProductById_Details(6));
+                      }}
+                    >
+                      Shop Now
+                    </Typography>
+                  </Box>
                 </Box>
               </Grid>
-
             </Grid>
           </Grid>
         </Box>
@@ -241,7 +292,6 @@ export default function Features() {
         >
           {/* 1 */}
           <Box>
-
             <Box
               sx={{
                 p: "10px",
@@ -267,7 +317,11 @@ export default function Features() {
             <Typography
               variant="h5"
               fontWeight={700}
-              sx={{ textAlign: "center", mt: "20px", fontSize:{md:'25px', xs:'16px'} }}
+              sx={{
+                textAlign: "center",
+                mt: "20px",
+                fontSize: { md: "25px", xs: "16px" },
+              }}
             >
               FREE AND FAST DELIVERY
             </Typography>
@@ -308,7 +362,11 @@ export default function Features() {
             <Typography
               variant="h5"
               fontWeight={700}
-              sx={{ textAlign: "center", mt: "20px", fontSize:{md:'25px', xs:'16px'} }}
+              sx={{
+                textAlign: "center",
+                mt: "20px",
+                fontSize: { md: "25px", xs: "16px" },
+              }}
             >
               24/7 CUSTOMER SERVICE
             </Typography>
@@ -349,7 +407,11 @@ export default function Features() {
             <Typography
               variant="h5"
               fontWeight={700}
-              sx={{ textAlign: "center", mt: "20px", fontSize:{md:'25px', xs:'16px'}  }}
+              sx={{
+                textAlign: "center",
+                mt: "20px",
+                fontSize: { md: "25px", xs: "16px" },
+              }}
             >
               MONEY BACK GUARANTEE
             </Typography>
