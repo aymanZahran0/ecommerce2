@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -18,7 +18,12 @@ export default function Account_Slice() {
   const { data } = useSelector((state) => state.auth.authData);
   const dispatch = useDispatch();
 
-    dispatch(getProducts());
+  useEffect(() => {
+      dispatch(getProducts());
+  
+  }, )
+  
+  
 
   return (
     <>

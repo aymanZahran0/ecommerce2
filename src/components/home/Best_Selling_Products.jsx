@@ -18,7 +18,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import MusicSvg from "../../assets/svgComponents/MusicSvg";
 import { ToastContainer, toast } from "react-toastify";
-import { getProductById_Cart, getProductById_Details } from "../../api/products_Api";
+import {
+  getProductById_Cart,
+  getProductById_Details,
+} from "../../api/products_Api";
 import { getProductById_Wishlist } from "../../api/products_Api";
 import { useNavigate } from "react-router-dom";
 import { removeWishlistItem } from "../../redux/wishlistSlice";
@@ -41,7 +44,7 @@ export default function Best_Selling_Products() {
   async function getProductData() {
     try {
       const { data } = await axiosInstance.get("/products");
-      console.log(data);
+      // console.log(data);
       setAllProducts(data);
       setLoading(false);
       return data;
@@ -123,17 +126,20 @@ export default function Best_Selling_Products() {
               this Month
             </Typography>
           </Stack>
-          
+
           <Box
             sx={{
-              display: {sm:"flex"},
+              display: { sm: "flex" },
               justifyContent: "space-between",
               mt: "20px",
             }}
           >
             <Typography
               variant="h3"
-              sx={{ fontSize: { xs: "25px", sm: "30", md: "45px" }, mb:{sm:'0px', xs:'20px'} }}
+              sx={{
+                fontSize: { xs: "25px", sm: "30", md: "45px" },
+                mb: { sm: "0px", xs: "20px" },
+              }}
             >
               Best Selling Products
             </Typography>
@@ -296,13 +302,13 @@ export default function Best_Selling_Products() {
                 </Box>
               </Grid>
             </>
-            // <Typography variant="h5" color=""> Loading... </Typography>
           )}
         </Grid>
       </Container>
 
       {/* 2 */}
-      <Box
+      {allProducts.length > 0?
+       <Box
         sx={{
           my: "70px",
           position: "relative",
@@ -322,7 +328,7 @@ export default function Best_Selling_Products() {
             Enhance Your
           </Typography>
           <Typography variant="h3" color="white">
-            Music Experience
+            Movies  Experience
           </Typography>
 
           <Stack direction="row" spacing={2} sx={{ my: "50px" }}>
@@ -405,6 +411,10 @@ export default function Best_Selling_Products() {
           </Stack>
 
           <Primary_Button
+            onClick={() => {
+              navigate("/buynow");
+              dispatch(getProductById_Details(14));
+            }}
             sx={{
               px: "30px",
               backgroundColor: "#00FF66",
@@ -424,10 +434,32 @@ export default function Best_Selling_Products() {
           }}
         >
           <Box sx={{}}>
-            <MusicSvg />
+            {/* <MusicSvg /> */}
+            <Box
+              component="img"
+              src={allProducts[13]?.image}
+              sx={{
+                width: { sm: "100%", xs: "90%" },
+              }}
+            ></Box>
           </Box>
         </Box>
       </Box>
+      :
+      <>
+       <Box
+        sx={{
+          my: "70px",
+          position: "relative",
+          height: "80vh",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Skeleton variant="rectangular" width="100%" height='80%' />
+      </Box>
+      </>}
     </>
   );
 }

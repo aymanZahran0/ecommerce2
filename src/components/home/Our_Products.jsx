@@ -153,8 +153,8 @@ export default function Our_Products() {
                       justifyContent: "center",
                     }}
                   >
-                    <Typography
-                      component="Img"
+                    <Box
+                      component="img"
                       src={product.image}
                       sx={{
                         width: "60%",
@@ -162,7 +162,7 @@ export default function Our_Products() {
                         mb: "0px",
                         pb: "0px",
                       }}
-                    ></Typography>
+                    ></Box>
                   </Box>
 
                   <Box

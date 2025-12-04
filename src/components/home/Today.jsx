@@ -47,7 +47,7 @@ export default function Today() {
   async function getProductData() {
     try {
       const { data } = await axiosInstance.get("/products");
-      console.log(data);
+      // console.log(data);
       setAllProducts(data);
       return data;
     } catch (err) {
@@ -287,8 +287,8 @@ export default function Today() {
                           justifyContent: "center",
                         }}
                       >
-                        <Typography
-                          component="Img"
+                        <Box
+                          component="img"
                           src={product.image}
                           sx={{
                             width: "60%",
@@ -296,7 +296,7 @@ export default function Today() {
                             mb: "0px",
                             pb: "0px",
                           }}
-                        ></Typography>
+                        ></Box>
                       </Box>
 
                       <Box
