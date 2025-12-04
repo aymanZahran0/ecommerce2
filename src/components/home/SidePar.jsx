@@ -162,7 +162,7 @@ export default function SidePar() {
                     my="30px"
                     onClick={() => {
                       navigate("/buynow");
-                      dispatch(getProductById_Details(10));
+                      dispatch(getProductById_Details(11));
                     }}
                   >
                     Shop Now
