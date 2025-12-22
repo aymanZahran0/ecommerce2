@@ -149,7 +149,7 @@ export default function Login() {
                 helperText={errors.password?.message}
                  sx={{ 'input':{pl:'15px'}}}
               />
-              <Box sx={{display:'flex' , gap:'10px'}}>
+              <Box sx={{display:'flex' , gap:'10px', color:'text.secondary'}}>
                 <Typography variant="caption" color="">
                   username: johnd
                 </Typography>
