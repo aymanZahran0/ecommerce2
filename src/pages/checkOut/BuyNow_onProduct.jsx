@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -10,22 +10,36 @@ import {
   Divider,
   Checkbox,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom"; //  conflict اعدت تسميته لعدم حدوث
+import { Link as RouterLink, useParams } from "react-router-dom"; //  conflict اعدت تسميته لعدم حدوث
 import { useSelector, useDispatch } from "react-redux";
 import { setQuantity } from "../../redux/cartSlice";
 import Primary_Button from "../../components/common/Primary_Button";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+import axiosInstance from "../../api/axiosInstance";
 
 export default function BuyNow_onProduct() {
   console.info("buyNow page");
 
+  const { id } = useParams();
+  const quantities = useSelector((state) => state.cart.quantities);
+  // console.info(quantities);
+  const [product, setProduct] = useState([]);
+
+  async function getProductById() {
+    try {
+      const { data } = await axiosInstance.get(`/products/${id}`);
+      console.log(data);
+      setProduct(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    getProductById();
   }, []);
 
-  const quantities = useSelector((state) => state.cart.quantities);
-  console.info(quantities);
-  const item = useSelector((state) => state.detailsItem.items.data);
 
   return (
     <>
@@ -49,7 +63,7 @@ export default function BuyNow_onProduct() {
         <Typography variant="body1">buy now</Typography>
       </Stack>
 
-      {item ? (
+      {product ? (
         <Container maxWidth="xl" sx={{ px: { md: "50px" }, mb: "40px" }}>
           <Typography variant="h4" my="30px">
             Billing Details
@@ -190,7 +204,7 @@ export default function BuyNow_onProduct() {
 
             {/* 2 */}
             <Box sx={{ width: { lg: "50%", md: "55%" } }}>
-              {item ? (
+              {product ? (
                 <Box>
                   <Box
                     sx={{
@@ -206,7 +220,7 @@ export default function BuyNow_onProduct() {
                       <Box sx={{ position: "relative" }}>
                         <Box
                           component="img"
-                          src={item?.image}
+                          src={product?.image}
                           sx={{ width: "40px", mr: "15px" }}
                         />
                         <Box
@@ -222,18 +236,18 @@ export default function BuyNow_onProduct() {
                             cursor: "pointer",
                           }}
                         >
-                          {quantities[item?.id]}
+                          {quantities[product?.id]}
                         </Box>
                       </Box>
                       <Typography variant="body1" color="">
-                        {item?.title.length > 20
-                          ? item?.title.slice(0, 20) + "..."
-                          : item?.title}
+                        {product?.title?.length > 20
+                          ? product?.title.slice(0, 20) + "..."
+                          : product?.title}
                       </Typography>
                     </Box>
 
                     {/* price */}
-                    <Typography variant="body1">${item?.price}</Typography>
+                    <Typography variant="body1">${product?.price}</Typography>
                   </Box>
                 </Box>
               ) : (
@@ -259,7 +273,7 @@ export default function BuyNow_onProduct() {
                     Subtotal:
                   </Typography>
                   <Typography variant="body1" color="">
-                    ${item?.price}
+                    ${product?.price}
                   </Typography>
                 </Box>
 
@@ -291,7 +305,7 @@ export default function BuyNow_onProduct() {
                     Total:
                   </Typography>
                   <Typography variant="body1" color="">
-                    ${item?.price}
+                    ${product?.price}
                   </Typography>
                 </Box>
               </Box>
