@@ -30,7 +30,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 
-
 export default function Navbar() {
   let myToken = localStorage.getItem("myToken");
 
@@ -38,12 +37,14 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElAccount, setAnchorElAccount] = useState(null);
- const wishlistItems = useSelector((state) => state.wishlist.items);
- const cartItems = useSelector((state) => state.cart.items);
+  const wishlistItems = useSelector((state) => state.wishlist.items);
+  const cartItems = useSelector((state) => state.cart.items);
 
-//  to filtter 
-  const uniqueWishlist= [...new Map(wishlistItems.map(i => [i.id, i])).values()];
-  const uniqueCart= [...new Map(cartItems.map(i => [i.id, i])).values()];
+  //  to filtter
+  const uniqueWishlist = [
+    ...new Map(wishlistItems.map((i) => [i.id, i])).values(),
+  ];
+  const uniqueCart = [...new Map(cartItems.map((i) => [i.id, i])).values()];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -163,7 +164,7 @@ export default function Navbar() {
                 </MenuItem>
               </Menu>
             </Box>
-{/* 
+
             <Typography
               variant="h6"
               noWrap
@@ -171,7 +172,7 @@ export default function Navbar() {
               sx={{ display: { xs: "block", sm: "block" } }}
             >
               Exclusive
-            </Typography> */}
+            </Typography>
 
             <Box
               sx={{
@@ -196,6 +197,7 @@ export default function Navbar() {
               >
                 Home
               </Link>
+
               <Link
                 component={RouterLink}
                 to="/contact"
@@ -254,7 +256,9 @@ export default function Navbar() {
                   component={RouterLink}
                   to="Wishlist"
                 >
-                  <Badge badgeContent={uniqueWishlist.length} color="error"><Favorite_Bar /></Badge>
+                  <Badge badgeContent={uniqueWishlist.length} color="error">
+                    <Favorite_Bar />
+                  </Badge>
                 </IconButton>
 
                 <IconButton
@@ -264,7 +268,10 @@ export default function Navbar() {
                   component={RouterLink}
                   to="cart"
                 >
-                  <Badge badgeContent={uniqueCart.length} color="error"> <Shop_Icon /></Badge>   
+                  <Badge badgeContent={uniqueCart.length} color="error">
+                    {" "}
+                    <Shop_Icon />
+                  </Badge>
                 </IconButton>
 
                 {/* account menu ______________ */}
@@ -354,9 +361,10 @@ export default function Navbar() {
               ""
             )}
           </Toolbar>
-          <Divider sx={{ backgroundColor:''}}/>
+          <Divider sx={{ backgroundColor: "" }} />
         </AppBar>
       </Box>
+
     </>
   );
 }

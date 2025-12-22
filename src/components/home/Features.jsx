@@ -101,8 +101,7 @@ export default function Features() {
                     my="20px"
                     color="white"
                     onClick={() => {
-                      navigate("/buynow");
-                      dispatch(getProductById_Details(10));
+                      navigate(`/buynow/${allProducts[9].id}`);
                     }}
                   >
                     Shop Now
@@ -168,8 +167,8 @@ export default function Features() {
                       my="20px"
                       color="white"
                       onClick={() => {
-                        navigate("/buynow");
-                        dispatch(getProductById_Details(3));
+                         navigate(`/buynow/${allProducts[2].id}`);
+                        // dispatch(getProductById_Details(3));
                       }}
                     >
                       Shop Now
@@ -219,8 +218,7 @@ export default function Features() {
                       my="20px"
                       color="white"
                       onClick={() => {
-                        navigate("/buynow");
-                        dispatch(getProductById_Details(15));
+                         navigate(`/buynow/${allProducts[14].id}`);
                       }}
                     >
                       Shop Now
@@ -271,8 +269,7 @@ export default function Features() {
                       my="20px"
                       color="white"
                       onClick={() => {
-                        navigate("/buynow");
-                        dispatch(getProductById_Details(6));
+                        navigate(`/buynow/${allProducts[5].id}`);
                       }}
                     >
                       Shop Now

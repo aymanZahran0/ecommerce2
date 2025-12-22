@@ -13,6 +13,7 @@ export default function SidePar() {
   const uniqueItems = [
     ...new Map(allProducts.map((item) => [item.category, item])).values(),
   ];
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -161,7 +162,7 @@ export default function SidePar() {
                     sx={{ textDecoration: "underline", cursor: "pointer" }}
                     my="30px"
                     onClick={() => {
-                      navigate("/buynow");
+                      navigate(`/buynow/${allProducts[10].id}`);
                       dispatch(getProductById_Details(11));
                     }}
                   >

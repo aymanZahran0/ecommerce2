@@ -28,6 +28,7 @@ let routers= createBrowserRouter([
     {path : 'checkout' , element:<ProtecedRoute><CheckOut /></ProtecedRoute>  },
     {path : 'detailsitem' , element:<ProtecedRoute><DetailsItem /></ProtecedRoute>  },
     {path : 'buynow' , element:<ProtecedRoute><BuyNow_onProduct/></ProtecedRoute>  },
+    // {path : 'buynow/:id' , element:<ProtecedRoute><BuyNow_onProduct/></ProtecedRoute>  },
     {path : 'category/:categoryName' , element:<ProtecedRoute><CategoryPage /></ProtecedRoute>  },
     {path : 'login' , element: <ProtecedAuthRoute><Login/></ProtecedAuthRoute>},
     {path : 'register', element: <ProtecedAuthRoute><Register/></ProtecedAuthRoute> },

@@ -413,8 +413,8 @@ export default function Best_Selling_Products() {
 
           <Primary_Button
             onClick={() => {
-              navigate("/buynow");
-              dispatch(getProductById_Details(14));
+              navigate(`/buynow/${allProducts[13].id}`);
+              // dispatch(getProductById_Details(14));
             }}
             sx={{
               px: "30px",

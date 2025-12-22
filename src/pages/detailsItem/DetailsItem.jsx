@@ -301,6 +301,7 @@ export default function DetailsItem() {
                   <Primary_Button
                     sx={{ fontWeight: "500", py: "1px", px: "30px" }}
                     onClick={() => {
+                      //  navigate(`buynow/${item.id}`);
                       navigate("/buynow");
                     }}
                   >

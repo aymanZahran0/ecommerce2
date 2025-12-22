@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -18,19 +18,25 @@ import { Link as RouterLink } from "react-router-dom"; //  conflict اعدت ت�
 import { useSelector, useDispatch } from "react-redux";
 import { setQuantity } from "../../redux/cartSlice";
 import Primary_Button from "../../components/common/Primary_Button";
+import axiosInstance from "../../api/axiosInstance";
 
 export default function CheckOut() {
   console.info("checkOut page");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+ 
 
   const quantities = useSelector((state) => state.cart.quantities);
   console.info(quantities);
   const items = useSelector((state) => state.cart.items);
-  const uniqueItems = [...new Map(items.map((i) => [i.id, i])).values()];
-
+  const uniqueItems = [...new Set(items)]
   const totalPrice = uniqueItems.reduce((sum, item) => {
     const q = quantities[item.id] || 1;
     return sum + item.price * q;
   }, 0);
+
 
   return (
     <>

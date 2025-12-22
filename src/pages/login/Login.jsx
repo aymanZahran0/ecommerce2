@@ -7,6 +7,7 @@ import {
   Typography,
   TextField,
   Link,
+  Divider
 } from "@mui/material";
 import Primary_Button from "../../components/common/Primary_Button";
 import { Link as RouterLink } from "react-router-dom";
@@ -85,9 +86,8 @@ export default function Login() {
         <Grid container spacing={2}>
           {/* 1 */}
           <Grid size={{ lg: 7, md: 0, xs: 0 }} sx={{}}>
-            <Typography component="Img" src={LoginImg} sx={{ width: "100%" }}>
-              {" "}
-            </Typography>
+            <Box component="Img" src={LoginImg} sx={{ width: "100%" }}>
+            </Box>
           </Grid>
 
           {/* 2 */}
@@ -149,6 +149,15 @@ export default function Login() {
                 helperText={errors.password?.message}
                  sx={{ 'input':{pl:'15px'}}}
               />
+              <Box sx={{display:'flex' , gap:'10px'}}>
+                <Typography variant="caption" color="">
+                  username: johnd
+                </Typography>
+                <Divider orientation="vertical" flexItem/>
+                <Typography variant="caption" color="">
+                   password: m38rmF$
+                </Typography>
+              </Box>
 
               {errorMessage?.length > 0 ? (
                 <Typography
